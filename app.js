@@ -8,6 +8,7 @@ mongoose.connect(CONNECTION_STRING, {dbName: "NeuMovieReview"});
 import session from "express-session";
 import UserRoutes from "./Routes/UserRoutes.js";
 import ReviewRoutes from "./Routes/ReviewRoutes.js";
+import LikedListRoutes from "./Routes/LikedListRoutes.js";
 
 const app = express();
 
@@ -39,5 +40,6 @@ app.use(
 app.use(express.json());
 ReviewRoutes(app)
 UserRoutes(app);
+LikedListRoutes(app);
 
 app.listen(4000)
