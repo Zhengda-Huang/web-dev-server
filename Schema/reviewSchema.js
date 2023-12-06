@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const reviewsSchema = new mongoose.Schema({
         movie : {type: String, required: true},
-        username: { type: String, required: true, unique: true },
+        username: { type: String, required: true },
         review : {type: String, required: true},
         date: Date,
         rating: String

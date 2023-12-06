@@ -1,9 +1,8 @@
-import likedListSchema from "../Schema/likedListSchema.js";
+import {likeListModel} from "../Models/Model.js";
 
-export const findMovieByUser = (username) => likedListSchema.find({username : username})
+export const findMovieByUser = (username) => likeListModel.find({username : username})
 
-export const addMovieByUser = (like) => likedListSchema.create(like)
+export const addMovieByUser = (like) => likeListModel.create(like)
 
-export const findSingularMovieByUserName = (username, movie) => likedListSchema.findOne({movie : movie, username :username})
-
-export const removeFromLikedList = (username, movie) => likedListSchema.deleteOne({movie : movie, username :username})
+export const findSingularMovieByUserName = (username, movie) => likeListModel.find({username : username, movie: movie})
+export const removeFromLikedList = (username, movie) => likeListModel.deleteOne({movie : movie, username :username})

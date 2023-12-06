@@ -1,4 +1,6 @@
 import * as dao from "../DAO/reviewDao.js";
+import {deleteReview, findReivewByUser, updateReview} from "../DAO/reviewDao.js";
+import {findSingularMovieByUserName} from "../DAO/likedListDao.js";
 
 function ReviewRoutes(app) {
     const findReviewsByMovie = async (req, res) => {
@@ -27,10 +29,36 @@ function ReviewRoutes(app) {
         res.json(review);
     }
 
+    const getReviewByUser = async (req, res) =>{
+        const {username, movie} = req.params;
+        const review = await dao.findReivewByUser(username, movie);
+        console.log(review)
+        res.json(review);
+    }
+
+    const deleteReview = async (req, res) =>{
+        const {username, movie} = req.params;
+        const review = await dao.deleteReview(username, movie)
+        res.json(review);
+    }
+
+    const updateReview = async (req, res) =>{
+        const {username, movie} = req.params;
+        const status = await dao.updateReview(username, movie, req.body);
+        const review = await dao.findReivewByUser(username, movie)
+        res.json(review)
+    }
+
+
     app.get("/api/review/movieName/:movieName", findReviewsByMovie);
     app.get("/api/review/username/:username", findRecentReviewsByUsername);
     app.get("/api/review/recent", findRecentReviews)
     app.post("/api/review", createReview)
+    app.delete("/api/review/username/:username/movie/:movie", deleteReview)
+    app.get("/api/review/username/:username/movie/:movie", getReviewByUser)
+    app.patch("/api/review/username/:username/movie/:movie", updateReview)
+
+
 
 }
 

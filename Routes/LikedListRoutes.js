@@ -15,11 +15,9 @@ function LikedListRoutes(app) {
 
     const findSingularMovieByUserName = async (req, res) => {
         const {username, movie} = req.params;
-        console.log(username)
-        console.log(movie)
         const movies = await dao.findSingularMovieByUserName(username, movie);
-        if (movies === null) {
-            res.json([movies])
+        if (movies.length >= 1) {
+            res.json(movies)
         } else {
             res.json([])
         }
@@ -31,10 +29,10 @@ function LikedListRoutes(app) {
         res.json(movies)
     }
 
-    app.get("/api/like/:username", findLikedMovieByUser);
-    app.get("api/like/:username/:movie", findSingularMovieByUserName)
-    app.delete("api/like/:username/:movie", removeFromLikedList)
-    app.post("/api/like", createLikedByUser);
+    app.get("/api/liked/:username", findLikedMovieByUser);
+    app.get("/api/liked/username/:username/movie/:movie", findSingularMovieByUserName)
+    app.delete("/api/liked/username/:username/movie/:movie", removeFromLikedList)
+    app.post("/api/liked", createLikedByUser);
 
 
 }
