@@ -32,7 +32,6 @@ function ReviewRoutes(app) {
     const getReviewByUser = async (req, res) =>{
         const {username, movie} = req.params;
         const review = await dao.findReivewByUser(username, movie);
-        console.log(review)
         res.json(review);
     }
 
@@ -44,8 +43,12 @@ function ReviewRoutes(app) {
 
     const updateReview = async (req, res) =>{
         const {username, movie} = req.params;
+        console.log(username)
+        console.log(movie)
+        console.log(req.body)
         const status = await dao.updateReview(username, movie, req.body);
         const review = await dao.findReivewByUser(username, movie)
+        console.log(review)
         res.json(review)
     }
 
