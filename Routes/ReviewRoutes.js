@@ -1,5 +1,5 @@
 import * as dao from "../DAO/reviewDao.js";
-import {deleteReview, findReivewByUser, updateReview} from "../DAO/reviewDao.js";
+import {deleteReview, findReivewById, findReivewByUser, updateReview} from "../DAO/reviewDao.js";
 import {findSingularMovieByUserName} from "../DAO/likedListDao.js";
 
 function ReviewRoutes(app) {
@@ -42,12 +42,10 @@ function ReviewRoutes(app) {
     }
 
     const updateReview = async (req, res) =>{
-        const {username, movie} = req.params;
-        console.log(username)
-        console.log(movie)
-        console.log(req.body)
-        const status = await dao.updateReview(username, movie, req.body);
-        const review = await dao.findReivewByUser(username, movie)
+        const { review_id } = req.params;
+        console.log( req.body)
+        const status = await dao.updateReview(review_id, req.body);
+        const review = await dao.findReivewById(review_id)
         console.log(review)
         res.json(review)
     }
@@ -59,7 +57,7 @@ function ReviewRoutes(app) {
     app.post("/api/review", createReview)
     app.delete("/api/review/username/:username/movie/:movie", deleteReview)
     app.get("/api/review/username/:username/movie/:movie", getReviewByUser)
-    app.put("/api/review/username/:username/movie/:movie", updateReview)
+    app.put("/api/review/:review_id", updateReview)
 
 }
 
