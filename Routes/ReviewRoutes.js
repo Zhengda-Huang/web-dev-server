@@ -59,9 +59,7 @@ function ReviewRoutes(app) {
     app.post("/api/review", createReview)
     app.delete("/api/review/username/:username/movie/:movie", deleteReview)
     app.get("/api/review/username/:username/movie/:movie", getReviewByUser)
-    app.patch("/api/review/username/:username/movie/:movie", updateReview)
-
-
+    app.put("/api/review/username/:username/movie/:movie", updateReview)
 
 }
 
