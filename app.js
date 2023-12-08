@@ -9,6 +9,7 @@ import session from "express-session";
 import UserRoutes from "./Routes/UserRoutes.js";
 import ReviewRoutes from "./Routes/ReviewRoutes.js";
 import LikedListRoutes from "./Routes/LikedListRoutes.js";
+import FollowsRoutes from "./Routes/FollowRoutes.js";
 
 const app = express();
 
@@ -41,5 +42,6 @@ app.use(express.json());
 ReviewRoutes(app)
 UserRoutes(app);
 LikedListRoutes(app);
+FollowsRoutes(app)
 
 app.listen(4000)
