@@ -9,4 +9,8 @@ export const findUserByCredentials = (username, password) =>
 export const updateUser = (userId, user) =>
     userModel.updateOne({ _id: userId }, { $set: user });
 export const deleteUser = (userId) => userModel.deleteOne({ _id: userId });
+export const searchForUser = (searchTerm) => {
+    const regex = new RegExp(".*" + searchTerm + ".*")
+    return userModel.find({username: {$regex: regex}})
+}
 

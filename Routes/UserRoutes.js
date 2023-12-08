@@ -54,6 +54,17 @@ function UserRoutes(app) {
     const account = async (req, res) => {
         res.json(req.session['currentUser']);
     };
+
+    const searchForUser = async (req,res) => {
+        const { searchTerm } = req.params;
+        const searchedUsers = await dao.searchForUser(searchTerm);
+        res.json(searchedUsers);
+    };
+
+
+
+
+    app.get("/api/users/search/:searchTerm", searchForUser)
     app.post("/api/users", createUser);
     app.get("/api/users", findAllUsers);
     app.get("/api/users/:userId", findUserById);
