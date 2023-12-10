@@ -3,9 +3,7 @@ import {findFollower} from "../DAO/followDao.js";
 
 function FollowsRoutes(app) {
     const findAllFollows = async (req, res) => {
-        console.log("findAllFollows");
         const follows = await dao.findAllFollows();
-        console.log(follows)
         res.send(follows);
     };
     const createUserFollowsUser = async (req, res) => {
@@ -20,7 +18,9 @@ function FollowsRoutes(app) {
     };
     const findUsersFollowedByUser = async (req, res) => {
         const { userId } = req.params;
+        console.log(userId)
         const following = await dao.findUsersFollowedByUser(userId);
+        console.log(following)
         res.send(following);
     };
     const findUsersFollowingUser = async (req, res) => {

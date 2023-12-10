@@ -19,7 +19,6 @@ function UserRoutes(app) {
     const findUserById = async (req, res) => {
 
         const user = await dao.findUserById(req.params.userId);
-        console.log(user)
         res.json(user);
     };
     const updateUser = async (req, res) => {
@@ -49,8 +48,13 @@ function UserRoutes(app) {
         res.json(currentUser);
     };
     const signout = (req, res) => {
-        req.session.destroy();
-        res.json(200);
+        console.log(req.session)
+        try {
+            req.session.destroy();
+            res.json(200);
+        }catch (e){
+            console.log(e)
+        }
     };
 
     const account = async (req, res) => {
