@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {application} from 'express';
 import cors from "cors";
 import "dotenv/config";
 import mongoose from "mongoose";
@@ -10,6 +10,7 @@ import UserRoutes from "./Routes/UserRoutes.js";
 import ReviewRoutes from "./Routes/ReviewRoutes.js";
 import LikedListRoutes from "./Routes/LikedListRoutes.js";
 import FollowsRoutes from "./Routes/FollowRoutes.js";
+import MovieRoutes from "./Routes/movieRoutes.js";
 
 const app = express();
 
@@ -25,14 +26,14 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: false,
 };
-
-if (process.env.NODE_ENV !== "development") {
-    sessionOptions.proxy = true;
-    sessionOptions.cookie = {
-        sameSite: "none",
-        secure: true,
-    };
-}
+//
+// if (process.env.NODE_ENV !== "development") {
+//     sessionOptions.proxy = true;
+//     sessionOptions.cookie = {
+//         sameSite: "none",
+//         secure: true,
+//     };
+// }
 
 app.use(
     session(sessionOptions)
@@ -43,5 +44,6 @@ ReviewRoutes(app)
 UserRoutes(app);
 LikedListRoutes(app);
 FollowsRoutes(app)
+MovieRoutes(app)
 
 app.listen(4000)
